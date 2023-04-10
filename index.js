@@ -14,21 +14,21 @@ const limiter = rateLimit({
 });
 
 app.use(morgan("combined"));
-// // Apply the rate limiting middleware to all requests
+//  Apply the rate limiting middleware to all requests
 app.use(limiter);
 app.use(
   "/authservice",
   createProxyMiddleware({
-    target: "http://localhost:3001/",
+    target: "https://pflightsauthservice.onrender.com/",
     changeOrigin: true,
   })
 );
 
 app.use("/bookingservice", checkAuthenticationUser.checkAuthentication);
+
 app.use(
-  "/bookingservice",
   createProxyMiddleware({
-    target: "http://localhost:3002/",
+    target: "https://pairlinebookingservice.onrender.com/",
     changeOrigin: true,
   })
 );
@@ -37,7 +37,7 @@ app.use("/flightservice", checkIsAdmin.checkIsAdmin);
 app.use(
   "/flightservice",
   createProxyMiddleware({
-    target: "http://localhost:3000/",
+    target: "https://pflightsandsearchservice.onrender.com/",
     changeOrigin: true,
   })
 );
