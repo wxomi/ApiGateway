@@ -13,6 +13,12 @@ const limiter = rateLimit({
   max: 10, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 });
 
+app.get("/ping", (req, res) => {
+  return res.status(200).json({
+    message: "pinged",
+  });
+});
+
 app.use(morgan("combined"));
 //  Apply the rate limiting middleware to all requests
 app.use(limiter);
