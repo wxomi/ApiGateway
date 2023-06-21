@@ -25,7 +25,7 @@ app.use(limiter);
 app.use(
   "/authservice",
   createProxyMiddleware({
-    target: "https://pflightsauthservice.onrender.com/",
+    target: "https://flightsauthservice.onrender.com/",
     changeOrigin: true,
   })
 );
@@ -33,8 +33,9 @@ app.use(
 app.use("/bookingservice", checkAuthenticationUser.checkAuthentication);
 
 app.use(
-  createProxyMiddleware({
-    target: "https://pairlinebookingservice.onrender.com/",
+  createProxyMiddleware("/bookingservice", {
+    target:
+      /*"https://pairlinebookingservice.onrender.com/"*/ "https://bookingservice-0gx5.onrender.com/",
     changeOrigin: true,
   })
 );
@@ -43,7 +44,7 @@ app.use("/flightservice", checkIsAdmin.checkIsAdmin);
 app.use(
   "/flightservice",
   createProxyMiddleware({
-    target: "https://pflightsandsearchservice.onrender.com/",
+    target: "https://flightandsearchservice.onrender.com/",
     changeOrigin: true,
   })
 );
